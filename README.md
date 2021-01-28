@@ -1,1 +1,1 @@
-LinkedIn Demo backend created using spring boot and MySql
+LinkedIn Demo backend created using Spring Boot and My SQL
