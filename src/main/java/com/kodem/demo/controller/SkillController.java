@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kodem.demo.model.SkillModel;
-import com.kodem.demo.model.TechnologyModel;
 import com.kodem.demo.model.UserModel;
 import com.kodem.demo.repository.SkillRepository;
-import com.kodem.demo.repository.TechnologyRepository;
 import com.kodem.demo.repository.UserRepository;
 import com.kodem.demo.requestbody.SkillRequestBody;
 
@@ -27,39 +26,37 @@ import com.kodem.demo.requestbody.SkillRequestBody;
  * @author sanju
  *
  */
+@RestController
 public class SkillController {
 	
 	@Autowired
 	private SkillRepository skillRepository;
 	
 	@Autowired
-	private TechnologyRepository technologyRepository;
-	
-	@Autowired
 	private UserRepository userRepository;
 	
-	@PostMapping
+	@PostMapping("createSkill")
 	public void createSkill(@RequestBody SkillRequestBody skillRequestBody)
 	{
-		TechnologyModel college = technologyRepository.findByUrl(skillRequestBody.getTechnology()).get();
 		UserModel user = userRepository.findByUsername(skillRequestBody.getUser()).get();
-		SkillModel skill = new SkillModel(user, college);
+		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology());
 		skillRepository.save(skill);
 	}
 	
 	@PutMapping("/{skillId}")
 	public void updateSkill(@RequestBody SkillRequestBody skillRequestBody,@PathVariable Integer skillId)
 	{
-		TechnologyModel college = technologyRepository.findByUrl(skillRequestBody.getTechnology()).get();
 		UserModel user = userRepository.findByUsername(skillRequestBody.getUser()).get();
-		SkillModel skill = new SkillModel(user, college);
+		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology());
 		skill.setSkillId(skillId);
 		skillRepository.save(skill);
 	}
 	
-	@GetMapping("/{username}")
-	public List<SkillModel> getAllSkill(@PathParam("user") String username)
+	@GetMapping("skills/{username}")
+	public List<SkillModel> getAllSkill(@PathVariable String username)
 	{
+		System.out.println(username);
+		System.out.println(skillRepository.findAll());
 		return skillRepository.findByUserUsername(username);
 	}
 	

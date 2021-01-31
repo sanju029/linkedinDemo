@@ -1,5 +1,6 @@
 package com.kodem.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +15,19 @@ public class SkillModel
 	private Integer skillId;
 	@ManyToOne
 	private UserModel user;
-	@ManyToOne
-	private TechnologyModel technology;
+	@Column(nullable = false)
+	private String technology;
 	
-	public SkillModel(Integer skillId, UserModel user, TechnologyModel technology) {
+	
+	
+	
+	public SkillModel() {
+		super();
+	}
+
+
+
+	public SkillModel(Integer skillId, UserModel user, String technology) {
 		super();
 		this.skillId = skillId;
 		this.user = user;
@@ -26,7 +36,7 @@ public class SkillModel
 
 	
 	
-	public SkillModel(UserModel user, TechnologyModel technology) {
+	public SkillModel(UserModel user, String technology) {
 		super();
 		this.user = user;
 		this.technology = technology;
@@ -50,11 +60,11 @@ public class SkillModel
 		this.user = user;
 	}
 
-	public TechnologyModel getTechnology() {
+	public String getTechnology() {
 		return technology;
 	}
 
-	public void setTechnology(TechnologyModel technology) {
+	public void setTechnology(String technology) {
 		this.technology = technology;
 	}
 

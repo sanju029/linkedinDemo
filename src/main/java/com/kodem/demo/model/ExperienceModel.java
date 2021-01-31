@@ -1,5 +1,6 @@
 package com.kodem.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,26 +14,36 @@ public class ExperienceModel {
 	private Integer experienceId;
 	@ManyToOne
 	private UserModel user;
-	@ManyToOne
-	private CompanyModel company;
+	@Column(nullable = false)
+	private String company;
 	private String role;
 	private String joiningYear;
 	private String endingYear;
 	
-	public ExperienceModel(Integer experienceId, UserModel user, CompanyModel company, String role, String joiningYear,
+	
+	
+	public ExperienceModel() {
+		super();
+	}
+
+
+
+	public ExperienceModel(Integer experienceId, UserModel user, String company, String role, String joiningYear,
 			String endingYear) {
 		super();
 		this.experienceId = experienceId;
 		this.user = user;
 		this.company = company;
 		this.role = role;
+		
+
 		this.joiningYear = joiningYear;
 		this.endingYear = endingYear;
 	}
 	
 	
 
-	public ExperienceModel(UserModel user, CompanyModel company, String role, String joiningYear, String endingYear) {
+	public ExperienceModel(UserModel user, String company, String role, String joiningYear, String endingYear) {
 		super();
 		this.user = user;
 		this.company = company;
@@ -59,11 +70,11 @@ public class ExperienceModel {
 		this.user = user;
 	}
 
-	public CompanyModel getCompany() {
+	public String getCompany() {
 		return company;
 	}
 
-	public void setCompany(CompanyModel company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
 

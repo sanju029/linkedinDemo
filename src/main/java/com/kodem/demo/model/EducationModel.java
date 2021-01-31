@@ -1,5 +1,6 @@
 package com.kodem.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,8 @@ public class EducationModel {
 	@ManyToOne
 	private UserModel user;
 	
-	@ManyToOne
-	private CollegeModel college;
+	@Column(nullable = false)
+	private String college;
 	private String course;
 	private String joiningYear;
 	private String endingYear;
@@ -25,7 +26,15 @@ public class EducationModel {
 	
 	
 	
-	public EducationModel(Integer educationId, UserModel user, CollegeModel college, String course, String joiningYear,
+	
+	
+	public EducationModel() {
+		super();
+	}
+
+
+
+	public EducationModel(Integer educationId, UserModel user, String college, String course, String joiningYear,
 			String endingYear, String grade) {
 		super();
 		this.educationId = educationId;
@@ -39,7 +48,7 @@ public class EducationModel {
 	
 	
 	
-	public EducationModel(UserModel user, CollegeModel college, String course, String joiningYear, String endingYear,
+	public EducationModel(UserModel user, String college, String course, String joiningYear, String endingYear,
 			String grade) {
 		super();
 		this.user = user;
@@ -64,10 +73,10 @@ public class EducationModel {
 	public void setUser(UserModel user) {
 		this.user = user;
 	}
-	public CollegeModel getCollege() {
+	public String getCollege() {
 		return college;
 	}
-	public void setCollege(CollegeModel college) {
+	public void setCollege(String college) {
 		this.college = college;
 	}
 	public String getCourse() {

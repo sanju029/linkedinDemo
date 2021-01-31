@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kodem.demo.model.SkillModel;
-import com.kodem.demo.model.TechnologyModel;
 import com.kodem.demo.model.UserModel;
 
 /**
@@ -19,6 +18,6 @@ public interface SkillRepository extends JpaRepository<SkillModel, Integer>{
 	
 	public List<SkillModel> findByUserUsername(String username);
 	
-	public List<SkillModel> findByTechnologyAndUser(TechnologyModel technology, UserModel user);
+	
 
 }

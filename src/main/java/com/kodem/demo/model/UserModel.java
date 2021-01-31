@@ -31,6 +31,12 @@ public class UserModel
 	
 	
 	
+	
+	
+	public UserModel() {
+		super();
+	}
+
 	public UserModel(Integer userId, String username, String password, String fullName, String email,
 			String phoneNumber, String address) {
 		super();

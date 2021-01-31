@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kodem.demo.model.CollegeModel;
 import com.kodem.demo.model.EducationModel;
 import com.kodem.demo.model.UserModel;
-import com.kodem.demo.repository.CollegeRepository;
 import com.kodem.demo.repository.EducationRepository;
 import com.kodem.demo.repository.UserRepository;
 import com.kodem.demo.requestbody.EducationRequestBody;
@@ -37,26 +35,21 @@ public class EducationController
 	private EducationRepository educationRepository;
 	
 	@Autowired
-	private CollegeRepository collegeRepository;
-	
-	@Autowired
 	private UserRepository userRepository;
 	
 	@PostMapping
 	public void createEducation(@RequestBody EducationRequestBody educationRequestBody)
 	{
-		CollegeModel college = collegeRepository.findByUrl(educationRequestBody.getCollege()).get();
 		UserModel user = userRepository.findByUsername(educationRequestBody.getUser()).get();
-		EducationModel education = new EducationModel(user, college, educationRequestBody.getCourse(), educationRequestBody.getJoiningYear(), educationRequestBody.getEndingYear(), educationRequestBody.getGrade());
+		EducationModel education = new EducationModel(user, educationRequestBody.getCollege(), educationRequestBody.getCourse(), educationRequestBody.getJoiningYear(), educationRequestBody.getEndingYear(), educationRequestBody.getGrade());
 		educationRepository.save(education);
 	}
 	
 	@PutMapping("/{educationId}")
 	public void updateEducation(@RequestBody EducationRequestBody educationRequestBody,@PathVariable Integer educationId)
 	{
-		CollegeModel college = collegeRepository.findByUrl(educationRequestBody.getCollege()).get();
 		UserModel user = userRepository.findByUsername(educationRequestBody.getUser()).get();
-		EducationModel education = new EducationModel(user, college, educationRequestBody.getCourse(), educationRequestBody.getJoiningYear(), educationRequestBody.getEndingYear(), educationRequestBody.getGrade());
+		EducationModel education = new EducationModel(user, educationRequestBody.getCollege(), educationRequestBody.getCourse(), educationRequestBody.getJoiningYear(), educationRequestBody.getEndingYear(), educationRequestBody.getGrade());
 		education.setEducationId(educationId);
 		educationRepository.save(education);
 	}
