@@ -28,7 +28,6 @@ import com.kodem.demo.requestbody.EducationRequestBody;
  *
  */
 @RestController
-@RequestMapping("/education")
 public class EducationController
 {
 	@Autowired
@@ -37,7 +36,7 @@ public class EducationController
 	@Autowired
 	private UserRepository userRepository;
 	
-	@PostMapping
+	@PostMapping("createEducation")
 	public void createEducation(@RequestBody EducationRequestBody educationRequestBody)
 	{
 		UserModel user = userRepository.findByUsername(educationRequestBody.getUser()).get();
@@ -45,7 +44,7 @@ public class EducationController
 		educationRepository.save(education);
 	}
 	
-	@PutMapping("/{educationId}")
+	@PutMapping("education/{educationId}")
 	public void updateEducation(@RequestBody EducationRequestBody educationRequestBody,@PathVariable Integer educationId)
 	{
 		UserModel user = userRepository.findByUsername(educationRequestBody.getUser()).get();
@@ -54,13 +53,13 @@ public class EducationController
 		educationRepository.save(education);
 	}
 	
-	@GetMapping("/{username}")
-	public List<EducationModel> getAllExperience(@PathParam("user") String username)
+	@GetMapping("education/{username}")
+	public List<EducationModel> getAllExperience(@PathVariable String username)
 	{
 		return educationRepository.findByUserUsername(username);
 	}
 	
-	@DeleteMapping("/{educationId}")
+	@DeleteMapping("education/{educationId}")
 	public void deleteEducation(@PathVariable Integer educationId)
 	{
 		educationRepository.deleteById(educationId);

@@ -33,7 +33,7 @@ public class ExperienceController
 	@Autowired
 	private UserRepository userRepository;
 	
-	@PostMapping
+	@PostMapping("createExperience")
 	public void createExperience(@RequestBody ExperienceRequestBody experienceRequestBody)
 	{
 		UserModel user = userRepository.findByUsername(experienceRequestBody.getUser()).get();
@@ -41,7 +41,7 @@ public class ExperienceController
 		experienceRepository.save(experience);
 	}
 	
-	@PutMapping("/{experienceId}")
+	@PutMapping("experience/{experienceId}")
 	public void updateExperience(@RequestBody ExperienceRequestBody experienceRequestBody,@PathVariable Integer experienceId)
 	{
 		UserModel user = userRepository.findByUsername(experienceRequestBody.getUser()).get();
@@ -50,13 +50,13 @@ public class ExperienceController
 		experienceRepository.save(experience);
 	}
 	
-	@GetMapping("/{username}")
-	public List<ExperienceModel> getAllExperience(@PathParam("user") String username)
+	@GetMapping("experience/{username}")
+	public List<ExperienceModel> getAllExperience(@PathVariable String username)
 	{
 		return experienceRepository.findByUserUsername(username);
 	}
 	
-	@DeleteMapping("/{experienceId}")
+	@DeleteMapping("experience/{experienceId}")
 	public void deleteExperience(@PathVariable Integer experienceId)
 	{
 		experienceRepository.deleteById(experienceId);

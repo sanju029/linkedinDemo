@@ -28,47 +28,48 @@ import com.kodem.demo.service.UserService;
  *
  */
 @RestController
+@RequestMapping("/user")
 public class UserController
 {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("createUser")
+	@PostMapping("/createUser")
 	public void createUser(@RequestBody UserModel user)
 	{
 		userService.createUser(user);
 	}
 	
-	@GetMapping("user/{username}")
+	@GetMapping("/{username}")
 	public UserModel getUser(@PathVariable String username)
 	{
 		System.out.println(username);
 		return userService.getUser(username);
 	}
 	
-	@DeleteMapping("user/{username}")
+	@DeleteMapping("/{username}")
 	public void deleteUser(@PathVariable String username)
 	{
 		userService.deleteUser(username);
 	}
 	
-	@PutMapping("user/{username}")
+	@PutMapping("/{username}")
 	public void updateUser(@PathVariable String username, @RequestBody UserModel user)
 	{
 		userService.updateUser(user, username);
 	}
 	
-	@GetMapping("users")
+	@GetMapping("/users")
 	public List<UserModel> getAllUsers()
 	{
 		return userService.getAllUsers();
 	}
 	
-	@GetMapping("user/")
-	public ResponseEntity<String> hello(UriComponentsBuilder uriComponentsBuilder){
-		UriComponents uriComponents = uriComponentsBuilder.path("sanju").build();
-		URI uri = uriComponents.toUri();
-        return ResponseEntity.created(uri).build();
-	}
+//	@GetMapping("user/")
+//	public ResponseEntity<String> hello(UriComponentsBuilder uriComponentsBuilder){
+//		UriComponents uriComponents = uriComponentsBuilder.path("sanju").build();
+//		URI uri = uriComponents.toUri();
+//        return ResponseEntity.created(uri).build();
+//	}
 
 }

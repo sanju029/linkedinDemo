@@ -36,6 +36,21 @@ public class UserModel
 	public UserModel() {
 		super();
 	}
+	
+	
+
+	public UserModel(String username, String password, String fullName, String email, String phoneNumber,
+			String address) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
+
+
 
 	public UserModel(Integer userId, String username, String password, String fullName, String email,
 			String phoneNumber, String address) {
