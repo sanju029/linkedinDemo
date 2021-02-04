@@ -3,6 +3,7 @@
  */
 package com.kodem.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kodem.demo.model.EducationModel;
 import com.kodem.demo.model.SkillModel;
 import com.kodem.demo.model.UserModel;
 import com.kodem.demo.repository.SkillRepository;
@@ -57,9 +59,10 @@ public class SkillController {
 	@GetMapping("/{username}")
 	public List<SkillModel> getAllSkill(@PathVariable String username)
 	{
-		System.out.println(username);
-		System.out.println(skillRepository.findAll());
-		return skillRepository.findByUserUsername(username);
+		List<SkillModel> skills = new ArrayList<>();
+        skillRepository.findByUserUsername(username).forEach(skills::add);
+        return skills;
+	
 	}
 	
 	@DeleteMapping("/{skillId}")

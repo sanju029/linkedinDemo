@@ -16,4 +16,5 @@ public interface EducationRepository extends JpaRepository<EducationModel, Integ
 {
 	public List<EducationModel> findByUserUsername(String username);
 	
+	
 }

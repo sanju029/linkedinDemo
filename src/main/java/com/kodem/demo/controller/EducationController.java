@@ -3,6 +3,7 @@
  */
 package com.kodem.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -44,7 +45,7 @@ public class EducationController
 		educationRepository.save(education);
 	}
 	
-	@PutMapping("education/{educationId}")
+	@PutMapping("/education/{educationId}")
 	public void updateEducation(@RequestBody EducationRequestBody educationRequestBody,@PathVariable Integer educationId)
 	{
 		UserModel user = userRepository.findByUsername(educationRequestBody.getUser()).get();
@@ -53,13 +54,15 @@ public class EducationController
 		educationRepository.save(education);
 	}
 	
-	@GetMapping("education/{username}")
+	@GetMapping("/education/{username}")
 	public List<EducationModel> getAllExperience(@PathVariable String username)
 	{
-		return educationRepository.findByUserUsername(username);
+		List<EducationModel> educations = new ArrayList<>();
+        educationRepository.findByUserUsername(username).forEach(educations::add);
+        return educations;
 	}
 	
-	@DeleteMapping("education/{educationId}")
+	@DeleteMapping("/education/{educationId}")
 	public void deleteEducation(@PathVariable Integer educationId)
 	{
 		educationRepository.deleteById(educationId);

@@ -3,11 +3,18 @@
  */
 package com.kodem.demo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author sanju
@@ -112,6 +119,20 @@ public class UserModel
 		return "UserModel [userId=" + userId + ", username=" + username + ", password=" + password + ", fullName="
 				+ fullName + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
 	}
+	
+	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonManagedReference(value="educationInUser")
+	private List<EducationModel> education;
+	
+	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonManagedReference(value="experienceInUser")
+	private List<ExperienceModel> experience;
+	
+	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonManagedReference(value="skillInUser")
+	private List<SkillModel> skill;
+	
+	
 	
 	
 	

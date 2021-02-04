@@ -2,10 +2,14 @@ package com.kodem.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class EducationModel {
@@ -14,8 +18,8 @@ public class EducationModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer educationId;
 	
-	@ManyToOne
-	private UserModel user;
+//	@ManyToOne
+//	private UserModel user;
 	
 	@Column(nullable = false)
 	private String college;
@@ -108,6 +112,11 @@ public class EducationModel {
 		return "EducationModel [educationId=" + educationId + ", user=" + user + ", college=" + college + ", course="
 				+ course + ", joiningYear=" + joiningYear + ", endingYear=" + endingYear + ", grade=" + grade + "]";
 	}
+	
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="user_user_id",nullable=false)
+	@JsonBackReference
+	private UserModel user;
 	
 	
 }
