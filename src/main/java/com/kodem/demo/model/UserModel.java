@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -122,17 +123,19 @@ public class UserModel
 	
 	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JsonManagedReference(value="educationInUser")
+	@JsonIgnore
 	private List<EducationModel> education;
 	
 	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JsonManagedReference(value="experienceInUser")
+	@JsonIgnore
 	private List<ExperienceModel> experience;
 	
 	@OneToMany(mappedBy="user",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JsonManagedReference(value="skillInUser")
+	@JsonIgnore
 	private List<SkillModel> skill;
-	
-	
+
 	
 	
 	

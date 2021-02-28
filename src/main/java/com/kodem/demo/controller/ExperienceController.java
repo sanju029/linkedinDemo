@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kodem.demo.model.EducationModel;
 import com.kodem.demo.model.ExperienceModel;
 import com.kodem.demo.model.UserModel;
 import com.kodem.demo.repository.ExperienceRepository;
@@ -60,6 +59,13 @@ public class ExperienceController
 		List<ExperienceModel> experiences = new ArrayList<>();
         experienceRepository.findByUserUsername(username).forEach(experiences::add);
         return experiences;
+	}
+	
+	@GetMapping("/experienceById/{id}")
+	public ExperienceModel getExperience(@PathVariable int id)
+	{
+        
+        return experienceRepository.findById(id).get();
 	}
 	
 	@DeleteMapping("/experience/{experienceId}")

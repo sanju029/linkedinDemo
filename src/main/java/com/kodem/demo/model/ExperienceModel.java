@@ -16,8 +16,6 @@ public class ExperienceModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer experienceId;
-//	@ManyToOne
-//	private UserModel user;
 	@Column(nullable = false)
 	private String company;
 	private String role;

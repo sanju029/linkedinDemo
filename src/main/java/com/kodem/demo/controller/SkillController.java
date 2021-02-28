@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kodem.demo.model.EducationModel;
 import com.kodem.demo.model.SkillModel;
 import com.kodem.demo.model.UserModel;
 import com.kodem.demo.repository.SkillRepository;
@@ -30,7 +28,6 @@ import com.kodem.demo.requestbody.SkillRequestBody;
  *
  */
 @RestController
-@RequestMapping("/skill")
 public class SkillController {
 	
 	@Autowired
@@ -42,21 +39,23 @@ public class SkillController {
 	@PostMapping("createSkill")
 	public void createSkill(@RequestBody SkillRequestBody skillRequestBody)
 	{
+		System.out.println(skillRequestBody);
 		UserModel user = userRepository.findByUsername(skillRequestBody.getUser()).get();
-		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology());
+
+		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology(),skillRequestBody.getRating());
 		skillRepository.save(skill);
 	}
 	
-	@PutMapping("/{skillId}")
+	@PutMapping("/skill/{skillId}")
 	public void updateSkill(@RequestBody SkillRequestBody skillRequestBody,@PathVariable Integer skillId)
 	{
 		UserModel user = userRepository.findByUsername(skillRequestBody.getUser()).get();
-		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology());
+		SkillModel skill = new SkillModel(user, skillRequestBody.getTechnology(), skillRequestBody.getRating());
 		skill.setSkillId(skillId);
 		skillRepository.save(skill);
 	}
 	
-	@GetMapping("/{username}")
+	@GetMapping("/skill/{username}")
 	public List<SkillModel> getAllSkill(@PathVariable String username)
 	{
 		List<SkillModel> skills = new ArrayList<>();
@@ -65,7 +64,14 @@ public class SkillController {
 	
 	}
 	
-	@DeleteMapping("/{skillId}")
+	@GetMapping("/skillById/{id}")
+	public SkillModel getSkill(@PathVariable int id)
+	{
+        
+        return skillRepository.findById(id).get();
+	}
+	
+	@DeleteMapping("/skill/{skillId}")
 	public void deleteSkill(@PathVariable Integer skillId)
 	{
 		skillRepository.deleteById(skillId);

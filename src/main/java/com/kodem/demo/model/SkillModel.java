@@ -21,21 +21,32 @@ public class SkillModel
 //	private UserModel user;
 	@Column(nullable = false)
 	private String technology;
+	private String rating;
 	
 	
 	
 	
+	public SkillModel(UserModel user,String technology, String rating) {
+		super();
+		this.technology = technology;
+		this.rating = rating;
+		this.user = user;
+	}
+
+
+
 	public SkillModel() {
 		super();
 	}
 
 
 
-	public SkillModel(Integer skillId, UserModel user, String technology) {
+	public SkillModel(Integer skillId, UserModel user, String technology,String rating) {
 		super();
 		this.skillId = skillId;
 		this.user = user;
 		this.technology = technology;
+		this.rating=rating;
 	}
 
 	
@@ -71,10 +82,25 @@ public class SkillModel
 	public void setTechnology(String technology) {
 		this.technology = technology;
 	}
+	
+	
+
+	public String getRating() {
+		return rating;
+	}
+
+
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "SkillModel [skillId=" + skillId + ", user=" + user + ", technology=" + technology + "]";
+		return "SkillModel [skillId=" + skillId + ", technology=" + technology + ", rating=" + rating + ", user=" + user
+				+ "]";
 	}
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)

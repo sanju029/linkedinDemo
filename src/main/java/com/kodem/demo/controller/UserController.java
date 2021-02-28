@@ -65,11 +65,5 @@ public class UserController
 		return userService.getAllUsers();
 	}
 	
-//	@GetMapping("user/")
-//	public ResponseEntity<String> hello(UriComponentsBuilder uriComponentsBuilder){
-//		UriComponents uriComponents = uriComponentsBuilder.path("sanju").build();
-//		URI uri = uriComponents.toUri();
-//        return ResponseEntity.created(uri).build();
-//	}
 
 }

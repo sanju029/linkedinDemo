@@ -62,6 +62,12 @@ public class EducationController
         return educations;
 	}
 	
+	@GetMapping("/educationById/{id}")
+	public EducationModel getExperience(@PathVariable int id)
+	{
+        return educationRepository.findById(id).get();
+	}
+	
 	@DeleteMapping("/education/{educationId}")
 	public void deleteEducation(@PathVariable Integer educationId)
 	{
